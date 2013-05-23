@@ -1,12 +1,9 @@
-<html>
-<body>
-
-<h2>Request</h2>
-<hr>
-<form action="complete" method="POST" enctype="multipart/form-data">
-Please fill in your user id: <input type="text" name="userId" /></BR>
-Reason:<BR/>
-<textarea cols="50" rows="5" name="description"></textarea></BR>
-</form>
-</body>
-</html>
+<div class="form-content one-col">
+        <input type="hidden" name="processId" value="${process.id}"/>
+	    <div class="form-row clearfix">
+                <label>Please fill in your user id: </label>
+                <input type="text" name="userId"/>
+                <label>Reason:</label>
+              	<textarea cols="50" rows="5" name="description"></textarea>
+        </div>                            
+</div>
