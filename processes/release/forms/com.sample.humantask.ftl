@@ -7,7 +7,6 @@
 Please fill in your user id: <input type="text" name="userId" /></BR>
 Reason:<BR/>
 <textarea cols="50" rows="5" name="description"></textarea></BR>
-<input type="submit" value="Complete">
 </form>
 </body>
 </html>
