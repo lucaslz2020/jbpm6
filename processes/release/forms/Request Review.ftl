@@ -1,10 +1,10 @@
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
 	</head>
 	<body>
 		<div class="form-content">
-		<input type=""hidden" name="taskId" value="${task.id}" />
+			<input type=""hidden" name="taskId" value="${task.id}" />
 		<h3>申请</h3>
 		<#if task.taskData.status = 'Ready'>	
 			<h4>为了执行该任务，你需要获取它</h4>    
