@@ -5,6 +5,7 @@
 	<body>
 		<div class="form-content one-col">
 		        <input type="hidden" name="processId" value="${process.id}"/>
+			    
 			    <div class="form-row clearfix">
 		                <label>请填写你的用户ID</label>
 		                <input type="text" name="userId"/>
