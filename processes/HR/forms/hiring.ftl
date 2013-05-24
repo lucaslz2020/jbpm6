@@ -1,5 +1,4 @@
  <div class="form-content one-col">
-            
             <input type="hidden" name="processId" value="${process.id}"/>
             <h3>Hire a new Developer Process</h3>
             <h4>Enter the Name of the Candiadte and <br/>
