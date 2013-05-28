@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_userIdItem" structureRef="String" />
+  <itemDefinition id="_dateItem" structureRef="String" />
+  <itemDefinition id="_descriptionItem" structureRef="String" />
+  <itemDefinition id="_resultItem" structureRef="String" />
+
+  <process processType="Private" isExecutable="true" id="processes.two.test01" name="test01" tns:packageName="defaultPackage" >
+
+    <!-- process variables -->
+    <property id="userId" itemSubjectRef="_userIdItem"/>
+    <property id="date" itemSubjectRef="_dateItem"/>
+    <property id="description" itemSubjectRef="_descriptionItem"/>
+    <property id="result" itemSubjectRef="_resultItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1"  isInterrupting="true"/>
+    <userTask id="_2" name="申请" >
+      <ioSpecification>
+        <dataInput id="_2_userIdInput" name="userId" />
+        <dataInput id="_2_dateInput" name="date" />
+        <dataInput id="_2_TaskNameInput" name="TaskName" />
+        <dataInput id="_2_NodeNameInput" name="NodeName" />
+        <dataOutput id="_2_descriptionOutput" name="description" />
+        <inputSet>
+          <dataInputRefs>_2_userIdInput</dataInputRefs>
+          <dataInputRefs>_2_dateInput</dataInputRefs>
+          <dataInputRefs>_2_TaskNameInput</dataInputRefs>
+          <dataInputRefs>_2_NodeNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_2_descriptionOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>userId</sourceRef>
+        <targetRef>_2_userIdInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>date</sourceRef>
+        <targetRef>_2_dateInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_2_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">request_user</from>
+          <to xsi:type="tFormalExpression">_2_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_2_NodeNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">申请</from>
+          <to xsi:type="tFormalExpression">_2_NodeNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_2_descriptionOutput</sourceRef>
+        <targetRef>description</targetRef>
+      </dataOutputAssociation>
+      <potentialOwner>
+        <resourceAssignmentExpression>
+          <formalExpression>#{userId}</formalExpression>
+        </resourceAssignmentExpression>
+      </potentialOwner>
+    </userTask>
+    <userTask id="_3" name="部门经理审批" >
+      <ioSpecification>
+        <dataInput id="_3_descriptionInput" name="description" />
+        <dataInput id="_3_userIdInput" name="userId" />
+        <dataInput id="_3_dateInput" name="date" />
+        <dataInput id="_3_TaskNameInput" name="TaskName" />
+        <dataInput id="_3_NodeNameInput" name="NodeName" />
+        <dataOutput id="_3_resultOutput" name="result" />
+        <inputSet>
+          <dataInputRefs>_3_descriptionInput</dataInputRefs>
+          <dataInputRefs>_3_userIdInput</dataInputRefs>
+          <dataInputRefs>_3_dateInput</dataInputRefs>
+          <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+          <dataInputRefs>_3_NodeNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_3_resultOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>description</sourceRef>
+        <targetRef>_3_descriptionInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>userId</sourceRef>
+        <targetRef>_3_userIdInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>date</sourceRef>
+        <targetRef>_3_dateInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_3_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">result_manager</from>
+          <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_3_NodeNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">部门经理审批</from>
+          <to xsi:type="tFormalExpression">_3_NodeNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_3_resultOutput</sourceRef>
+        <targetRef>result</targetRef>
+      </dataOutputAssociation>
+      <potentialOwner>
+        <resourceAssignmentExpression>
+          <formalExpression>krisv</formalExpression>
+        </resourceAssignmentExpression>
+      </potentialOwner>
+    </userTask>
+    <endEvent id="_5" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+
+    <!-- connections -->
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3" />
+    <sequenceFlow id="_3-_5" sourceRef="_3" targetRef="_5" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="processes.two.test01" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="88" y="135" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="168" y="135" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="300" y="135" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="435" y="133" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="112" y="159" />
+        <di:waypoint x="218" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_3" >
+        <di:waypoint x="218" y="159" />
+        <di:waypoint x="350" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_5" >
+        <di:waypoint x="350" y="159" />
+        <di:waypoint x="459" y="157" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>
